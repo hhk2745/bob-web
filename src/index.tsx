@@ -6,17 +6,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import {BrowserRouter} from "react-router-dom";
+import axios from "axios";
+import {CookiesProvider} from "react-cookie";
+
+axios.defaults.baseURL = "https://www.abc.com";
+axios.defaults.withCredentials = true;
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <CookiesProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

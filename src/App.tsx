@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import {Counter} from './features/counter/Counter';
 import './App.css';
@@ -6,8 +6,16 @@ import {Link, Route, Routes, Outlet} from "react-router-dom";
 import About from "./pages/about";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
+import {fetchApi} from "./api/sample";
+import Login from "./components/Login";
 
 function App() {
+  useEffect(()=>{
+    // 새로고침 시 토큰 처리
+    // onLoginRefresh();
+  }, []);
+
+
   return <Routes>
     <Route path="/" element={<Layout/>}>
       <Route index element={<Home/>}/>
@@ -35,10 +43,16 @@ function Layout() {
           </li>
           <li>
             <Link to="/signup">회원가입</Link>
-
+            <Login />
             <button onClick={()=>{
-              console.log('로그인 클릭')
-            }}>로그인</button>
+              fetchApi('/sample', 'get', {})
+                .then(res=>{
+                  console.log(res)
+                })
+
+            }}>
+              sample
+            </button>
           </li>
         </ul>
       </nav>

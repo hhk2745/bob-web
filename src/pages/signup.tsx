@@ -50,6 +50,7 @@ const Signup = ()=>{
     fetchApi('/user', 'post', param).then(res=>{
       if(res.data.result < 1){
         alert('TODO 실패 핸들링');
+        return;
       }
       alert('회원가입 완료~');
       navigate('/');
